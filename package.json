@@ -10,6 +10,7 @@
   },
   "author": "kudryavtsevsr",
   "dependencies": {
+    "OnlineJS": "git+https://github.com/PixelsCommander/OnlineJS.git",
     "axios": "^0.16.2",
     "bootstrap-css-only": "^3.3.7",
     "firebase": "^4.3.0",
