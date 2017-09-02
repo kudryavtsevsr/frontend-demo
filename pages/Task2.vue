@@ -42,7 +42,6 @@
 	var Vue = require('vue/dist/vue.js');
 	var axios = require('axios');
 	var qs = require('qs');
-	require('OnlineJS/dist/online.min.js');
 	
 	export default {
 		data: function() {
@@ -206,16 +205,20 @@
 		created: function() {
 			// Проверяем подключение к интернету
 			var self = this;
-			window.onLineHandler = function() {
-				console.log("online");
-				self.connnection = true;
-				// Отправляем неотправленные сообщения
-				self.resendMessages();
-			};
-			window.offLineHandler = function() {
-				console.log("offline");
-				self.connnection = false;
-			};
+			window.setInterval(function() {
+				axios.get(self.url)
+				.then(function(response) {
+					console.log("online");
+					// Отправляем неотправленные сообщения если соединение восстановилось
+					if(!self.connnection) self.resendMessages();
+					self.connnection = true;
+				})
+				.catch(function (error) {
+					console.log("offline");
+					self.connnection = false;
+					console.log(error);
+				});
+			}, 5000);
 		}
 		}
 </script>
