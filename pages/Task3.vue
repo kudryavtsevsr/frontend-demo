@@ -64,7 +64,6 @@
 
 <style scope lang="sass">
 	.inputs
-		width: 350px
 		overflow: hidden
 		&__error
 			color: #d9534f
